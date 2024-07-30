@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import {toast,ToastContainer} from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Contect() {
   const [name, setName] = useState('');
@@ -19,17 +21,18 @@ export default function Contect() {
           });
           const data = await response.text();
           if (response.ok) {
-              alert("Email sent successfully");
+            toast.success("Your message has been sent successfully.");
               setName('');
               setEmail('');
               setMessage('');
           } else {
-              alert('Error sending email: ' + data);
+            toast.error('Error sending email: ' + data);
           }
       } catch (error) {
-          console.error('Error:', error);
-          alert('Failed to send email');
+        console.error('Error:', error);
+        toast.error('Failed to send email');
       }
+    
   };
   return (
     <div>
@@ -55,6 +58,7 @@ export default function Contect() {
       </div>
       {/* Footer */}
       <Footer />
+      <ToastContainer/>
     </div>
   )
 }
